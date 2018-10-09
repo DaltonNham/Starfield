@@ -1,15 +1,43 @@
-//your code here
+NormalParticle [] poof;
 void setup()
 {
-	//your code here
+	size(300,300);
+	poof = new NormalParticle[50];
+	for (int i=0; i<poof.length; i++)
+	{
+		poof[i] = new NormalParticle();
+	}
 }
 void draw()
 {
-	//your code here
+	for (int i = 0; i<poof.length; i++)
+ 	{
+ 		poof[i].show();
+ 		poof[i].move();
+ 	}
 }
 class NormalParticle
 {
-	//your code here
+	double normX, normY, normSpeed, normAngle;
+	int normColor;
+	NormalParticle()
+	{
+		normX = 150;
+		normY = 150;
+		normAngle = ((double)(Math.random()*(2*Math.PI)));
+		normSpeed = ((double)(Math.random()*10));
+		normColor = color(((int)(Math.random()*256)),((int)(Math.random()*256)),((int)(Math.random()*256)));
+	}
+	void move()
+	{
+		normX = Math.cos(normAngle) * normSpeed;
+		normY = Math.sin(normAngle) * normSpeed;
+	}
+	void show()
+	{
+		fill(normColor);
+		ellipse(normX, normY, 10 , 10);
+	}
 }
 interface Particle
 {

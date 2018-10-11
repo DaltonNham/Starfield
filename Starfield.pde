@@ -1,8 +1,9 @@
 NormalParticle [] poof;
 void setup()
 {
-	size(300,300);
-	poof = new NormalParticle[50];
+	frameRate(60);
+	size(500,500);
+	poof = new NormalParticle[500];
 	for (int i=0; i<poof.length; i++)
 	{
 		poof[i] = new NormalParticle();
@@ -10,6 +11,7 @@ void setup()
 }
 void draw()
 {
+	background(0);
 	for (int i = 0; i<poof.length; i++)
  	{
  		poof[i].show();
@@ -22,21 +24,21 @@ class NormalParticle
 	int normColor;
 	NormalParticle()
 	{
-		normX = 150;
-		normY = 150;
-		normAngle = ((double)(Math.random()*(2*Math.PI)));
-		normSpeed = ((double)(Math.random()*10));
-		normColor = color(((int)(Math.random()*256)),((int)(Math.random()*256)),((int)(Math.random()*256)));
+		normX = 250;
+		normY = 250;
+		normAngle = (Math.random()*10)*(Math.PI);
+		normSpeed = (Math.PI*2*Math.random());
+		normColor = color(((int)(Math.random()*156)+100),((int)(Math.random()*156)+100),((int)(Math.random()*156)+100));
 	}
 	void move()
 	{
-		normX = Math.cos(normAngle) * normSpeed;
-		normY = Math.sin(normAngle) * normSpeed;
+		normX = normX + (Math.cos(normAngle) * normSpeed);
+		normY = normY + (Math.sin(normAngle) * normSpeed);
 	}
 	void show()
 	{
 		fill(normColor);
-		ellipse(normX, normY, 10 , 10);
+		ellipse((float)normX, (float)normY, 5 , 5);
 	}
 }
 interface Particle

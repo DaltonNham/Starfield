@@ -1,7 +1,7 @@
 NormalParticle [] poof;
 void setup()
 {
-	frameRate(60);
+	frameRate(15);
 	size(500,500);
 	poof = new NormalParticle[500];
 	for (int i=0; i<poof.length; i++)
@@ -26,9 +26,9 @@ class NormalParticle
 	{
 		normX = 250;
 		normY = 250;
-		normAngle = (Math.random()*10)*(Math.PI);
+		normAngle = (Math.random()*5)*(Math.PI);
 		normSpeed = (Math.PI*2*Math.random());
-		normColor = color(((int)(Math.random()*156)+100),((int)(Math.random()*156)+100),((int)(Math.random()*156)+100));
+		normColor = color(255,255,((int)(Math.random()*156)+100));
 	}
 	void move()
 	{
@@ -47,7 +47,14 @@ interface Particle
 }
 class OddballParticle //uses an interface
 {
-	//your code here
+	void move()
+	{
+
+	}
+	void show()
+	{
+		
+	}
 }
 class JumboParticle //uses inheritance
 {

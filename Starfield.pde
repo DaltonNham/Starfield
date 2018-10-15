@@ -1,4 +1,5 @@
 NormalParticle [] poof;
+Particle [] puff = new Particle[1];;
 void setup()
 {
 	frameRate(15);
@@ -16,6 +17,15 @@ void draw()
  	{
  		poof[i].show();
  		poof[i].move();
+		for (int j = 0; j<puff.length; j++)
+		{
+			if (j <= 500)
+			{
+				puff[j] = new OddballParticle();
+			}
+			puff[j].move();
+			puff[j].show();
+		}
  	}
 }
 class NormalParticle
@@ -43,21 +53,36 @@ class NormalParticle
 }
 interface Particle
 {
-	//your code here
-}
-class OddballParticle //uses an interface
-{
-	void move()
-	{
+	public void move();
+	public void show();
 
+}
+class OddballParticle implements Particle //uses an interface
+{
+	double oddX, oddY, oddVert, oddHorz;
+	OddballParticle ()
+	{
+		oddX = 250;
+		oddY = 250;
+		oddVert = ((double)(Math.random()*11)-5);
+		oddHorz = ((double)(Math.random()*11)-5);
 	}
+	public void move()
+	{
+		oddX = oddX + oddHorz;
+		oddY = oddY + oddVert;
+	}
+	public void show()
+	{
+		fill(255,0,0);
+		ellipse((float)oddX, (float)oddY, 100 , 100);
+	}
+}
+class JumboParticle extends Parti//uses inheritance
+{
 	void show()
 	{
-		
+		ellipse()
 	}
-}
-class JumboParticle //uses inheritance
-{
-	//your code here
 }
 

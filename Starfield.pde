@@ -1,14 +1,15 @@
-NormalParticle [] poof;
-Particle [] puff = new Particle[1];;
+Particle [] poof;
 void setup()
 {
 	frameRate(15);
 	size(500,500);
-	poof = new NormalParticle[500];
+	poof = new Particle[500];
 	for (int i=0; i<poof.length; i++)
 	{
 		poof[i] = new NormalParticle();
 	}
+	poof[0] = new OddballParticle();
+	poof[499] = new JumboParticle();
 }
 void draw()
 {
@@ -17,38 +18,29 @@ void draw()
  	{
  		poof[i].show();
  		poof[i].move();
-		for (int j = 0; j<puff.length; j++)
-		{
-			if (j <= 500)
-			{
-				puff[j] = new OddballParticle();
-			}
-			puff[j].move();
-			puff[j].show();
-		}
  	}
 }
-class NormalParticle
+class NormalParticle implements Particle
 {
-	double normX, normY, normSpeed, normAngle;
-	int normColor;
+	double myX, myY, mySpeed, myAngle;
+	int myColor;
 	NormalParticle()
 	{
-		normX = 250;
-		normY = 250;
-		normAngle = (Math.random()*5)*(Math.PI);
-		normSpeed = (Math.PI*2*Math.random());
-		normColor = color(255,255,((int)(Math.random()*156)+100));
+		myX = 250;
+		myY = 250;
+		myAngle = (Math.random()*5)*(Math.PI);
+		mySpeed = (Math.PI*2*Math.random());
+		myColor = color(255,255,((int)(Math.random()*156)+100));
 	}
-	void move()
+	public void move()
 	{
-		normX = normX + (Math.cos(normAngle) * normSpeed);
-		normY = normY + (Math.sin(normAngle) * normSpeed);
+		myX = myX + (Math.cos(myAngle) * mySpeed);
+		myY = myY + (Math.sin(myAngle) * mySpeed);
 	}
-	void show()
+	public void show()
 	{
-		fill(normColor);
-		ellipse((float)normX, (float)normY, 5 , 5);
+		fill(myColor);
+		ellipse((float)myX, (float)myY, 5 , 5);
 	}
 }
 interface Particle
@@ -59,30 +51,30 @@ interface Particle
 }
 class OddballParticle implements Particle //uses an interface
 {
-	double oddX, oddY, oddVert, oddHorz;
-	OddballParticle ()
+	double myX, myY;
+	int myColor;
+	OddballParticle()
 	{
-		oddX = 250;
-		oddY = 250;
-		oddVert = ((double)(Math.random()*11)-5);
-		oddHorz = ((double)(Math.random()*11)-5);
+		myX = 250;
+		myY = 250;
+		myColor = color(255,0,0);
 	}
 	public void move()
 	{
-		oddX = oddX + oddHorz;
-		oddY = oddY + oddVert;
+		myX = myX + (int)((Math.random()*11)-5);
+		myY = myY + (int)((Math.random()*11)-5);
 	}
 	public void show()
 	{
-		fill(255,0,0);
-		ellipse((float)oddX, (float)oddY, 100 , 100);
+		fill(myColor);
+		rect((float)myX, (float)myY, 10 , 10);
 	}
 }
-class JumboParticle extends Parti//uses inheritance
+class JumboParticle extends NormalParticle//uses inheritance
 {
-	void show()
+	public void show()
 	{
-		ellipse()
+		ellipse((float)myX, (float)myY, 20, 20);
 	}
 }
 
